@@ -7,8 +7,8 @@ angular.module('app.routes', [])
   // Set up the various states which the app can be in.
   // Each state's controller can be found in controllers.js
   $stateProvider
-    
-  
+
+
 
       .state('tabsController.cameraTabDefaultPage', {
     url: '/page2',
@@ -64,6 +64,18 @@ angular.module('app.routes', [])
     controller: 'friendsCtrl'
   })
 
+  .state('addFriends', {
+    url: '/addFriends',
+    templateUrl: 'templates/addFriends.html',
+    controller: 'addFriendsCtrl'
+  })
+
+  .state('editFriends', {
+    url: '/editFriends/:id',
+    templateUrl: 'templates/addFriends.html',
+    controller: 'editFriendsCtrl'
+  })
+
   .state('images', {
     url: '/page8',
     templateUrl: 'templates/images.html',
@@ -78,6 +90,6 @@ angular.module('app.routes', [])
 
 $urlRouterProvider.otherwise('/page1/page2')
 
-  
+
 
 });
