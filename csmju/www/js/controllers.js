@@ -64,16 +64,15 @@ function ($scope, $stateParams,userServices,$state) {
       }
 
       $scope.editUser = function(user){
-        alert(JSON.stringify(user.id));
         $state.go('editFriends',{"id":user.id});
       }
 
 }])
 
-.controller('addFriendsCtrl', ['$scope', '$stateParams','$cordovaCamera', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('addFriendsCtrl', ['$scope', '$stateParams','$cordovaCamera','userServices','$state', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams,$cordovaCamera) {
+function ($scope, $stateParams,$cordovaCamera,userServices,$state) {
     $scope.user={};
 
     $scope.takeCamera = function(){
@@ -103,20 +102,23 @@ function ($scope, $stateParams,$cordovaCamera) {
 
       }
 
-      $scope.updateUser = function(user){
-        userService.updateUser(user).then(function(result){
-            alert(result.data);
+      $scope.saveUser = function(){
+        userServices.saveUser($scope.user).then(function(result){
+            $state.go('friends',{'flag':'all'});
         });
       }
 
 }])
 
-.controller('editFriendsCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('editFriendsCtrl', ['$scope', '$stateParams','userServices','$state', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams) {
+function ($scope, $stateParams,userServices,$state) {
   $scope.user={};
-  console.log($stateParams);
+  userServices.getUsersById($stateParams.id).then(function(result){
+      $scope.user=result;
+  });
+  console.log($stateParams.id);
   alert("edit");
 }])
 

@@ -60,6 +60,7 @@ angular.module('app.routes', [])
 
   .state('friends', {
     url: '/page7',
+    cache: false,
     templateUrl: 'templates/friends.html',
     controller: 'friendsCtrl'
   })
